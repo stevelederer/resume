@@ -15,8 +15,9 @@ jobs:
       # Install B2 CLI (Choose one method)
       - name: Install Backblaze B2 CLI via pip
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install b2
+          curl -LO https://github.com/Backblaze/B2_Command_Line_Tool/releases/latest/download/b2-linux
+          chmod +x b2-linux
+          sudo mv b2-linux /usr/local/bin/b2
       
       - name: Authorize B2 CLI
         run: |
