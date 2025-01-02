@@ -18,13 +18,17 @@ jobs:
           curl -LO https://github.com/Backblaze/B2_Command_Line_Tool/releases/latest/download/b2-linux
           chmod +x b2-linux
           sudo mv b2-linux /usr/local/bin/b2
-      
-      - name: Authorize B2 CLI
-        run: |
-          b2 account authorize ${{ secrets.B2_APPLICATION_KEY_ID }} ${{ secrets.B2_APPLICATION_KEY }}
 
-      - name: Upload File to B2
-        env:
-          BUCKET: ${{ secrets.B2_BUCKET_NAME }}
+      - name: Check if B2 installed
         run: |
-          b2 file upload --content-type application/pdf $BUCKET SteveLederer_Resume.pdf /resume/SteveLederer_Resume.pdf
+          b2 --help
+      
+      # - name: Authorize B2 CLI
+      #   run: |
+      #     b2 account authorize ${{ secrets.B2_APPLICATION_KEY_ID }} ${{ secrets.B2_APPLICATION_KEY }}
+
+      # - name: Upload File to B2
+      #   env:
+      #     BUCKET: ${{ secrets.B2_BUCKET_NAME }}
+      #   run: |
+      #     b2 file upload --content-type application/pdf $BUCKET SteveLederer_Resume.pdf /resume/SteveLederer_Resume.pdf
