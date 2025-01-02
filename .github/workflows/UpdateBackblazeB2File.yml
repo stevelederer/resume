@@ -20,11 +20,10 @@ jobs:
       
       - name: Authorize B2 CLI
         run: |
-          b2 authorize-account ${{ secrets.B2_APPLICATION_KEY_ID }} ${{ secrets.B2_APPLICATION_KEY }}
+          b2 account authorize ${{ secrets.B2_APPLICATION_KEY_ID }} ${{ secrets.B2_APPLICATION_KEY }}
 
       - name: Upload File to B2
         env:
           BUCKET: ${{ secrets.B2_BUCKET_NAME }}
         run: |
-          # Example: Upload a file to B2
-          b2 upload-file $BUCKET path/to/local/file.txt file.txt
+          b2 file upload --content-type application/pdf $BUCKET SteveLederer_Resume.pdf /resume/SteveLederer_Resume.pdf
