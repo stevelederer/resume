@@ -27,4 +27,4 @@ jobs:
         env:
           BUCKET: ${{ secrets.B2_BUCKET_NAME }}
         run: |
-          b2 file upload --content-type application/pdf $BUCKET SteveLederer_Resume.pdf /resume/SteveLederer_Resume.pdf
+          b2 file upload --content-type application/pdf $BUCKET SteveLederer_Resume.pdf resume/SteveLederer_Resume.pdf
