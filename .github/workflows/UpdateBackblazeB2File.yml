@@ -1,0 +1,30 @@
+name: Update Backblaze B2 File
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the main branch
+jobs:
+  update-b2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      # Install B2 CLI (Choose one method)
+      - name: Install Backblaze B2 CLI via pip
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install b2
+      
+      - name: Authorize B2 CLI
+        run: |
+          b2 authorize-account ${{ secrets.B2_APPLICATION_KEY_ID }} ${{ secrets.B2_APPLICATION_KEY }}
+
+      - name: Upload File to B2
+        env:
+          BUCKET: ${{ secrets.B2_BUCKET_NAME }}
+        run: |
+          # Example: Upload a file to B2
+          b2 upload-file $BUCKET path/to/local/file.txt file.txt
